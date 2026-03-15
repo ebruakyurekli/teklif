@@ -10,6 +10,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'moment-2025-gizli-anahtar-degistir')
+app.config['PERMANENT_SESSION_LIFETIME'] = 86400 * 30  # 30 gün
+app.config['SESSION_PERMANENT'] = True
 
 DB_PATH = os.environ.get('DB_PATH', '/tmp/moment.db')
 
@@ -165,6 +167,7 @@ def login():
         password = request.form.get('password', '')
         user = next((u for u in USERS if u['username'] == username), None)
         if user and check_password_hash(user['password'], password):
+            session.permanent = True
             session['username'] = username
             session['name']     = user['name']
             session['role']     = user.get('role', 'user')

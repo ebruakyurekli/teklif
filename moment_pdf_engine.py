@@ -77,39 +77,47 @@ class Header(Flowable):
         # Logo sol
         try:
             img = ImageReader(LOGO_PATH)
-            c.drawImage(img, 3*mm, h-top_h+(top_h-30*mm)/2,
-                        width=40*mm, height=30*mm,
+            c.drawImage(img, 4*mm, h-top_h+(top_h-27*mm)/2,
+                        width=36*mm, height=27*mm,
                         mask='auto', preserveAspectRatio=True, anchor='w')
         except: pass
 
-        # moment. ortalı
-        cy = h - top_h/2
+        # moment. + alt bilgiler — tam sayfa ortası
+        cx = w/2
+        top_center = h - top_h/2 + 2*mm   # dikey merkez biraz yukarı
+
+        # moment.
         c.setFillColor(C_INK)
         c.setFont("DV-B", 22)
-        c.drawCentredString(w/2+8*mm, cy+6*mm, "moment.")
+        c.drawCentredString(cx, top_center + 6*mm, "moment.")
+
+        # TABİAT PARKI
         c.setFillColor(C_MUTED)
         c.setFont("DV", 7.5)
-        c.drawCentredString(w/2+8*mm, cy-1*mm, "T A B İ A T   P A R K I")
+        c.drawCentredString(cx, top_center + 1*mm, "T A B İ A T   P A R K I")
+
+        # İnce çizgi
         c.setStrokeColor(C_SAND)
         c.setLineWidth(0.4)
-        c.line(w/2-18*mm, cy-4*mm, w/2+34*mm, cy-4*mm)
+        c.line(cx - 24*mm, top_center - 1.5*mm, cx + 24*mm, top_center - 1.5*mm)
 
-        # İletişim ortalı — moment. altında
+        # Tel · email · web — tek satır, tam ortada
         c.setFillColor(C_BARK)
         c.setFont("DV", 7.5)
-        c.drawCentredString(w/2+8*mm, cy-9*mm, "+90 532 441 18 11  ·  info@moment.com.tr  ·  moment.com.tr")
+        c.drawCentredString(cx, top_center - 6*mm,
+            "+90 532 441 18 11  ·  info@moment.com.tr  ·  moment.com.tr")
 
         # Ayırıcı
         c.setFillColor(C_GOLD)
-        c.rect(0, h-40*mm, w, 1.5*mm, fill=1, stroke=0)
+        c.rect(0, h-42*mm, w, 1.5*mm, fill=1, stroke=0)
         c.setFillColor(C_SAND)
-        c.rect(0, h-40.7*mm, w, 0.4*mm, fill=1, stroke=0)
+        c.rect(0, h-42.7*mm, w, 0.4*mm, fill=1, stroke=0)
 
         # Slogan zemin
         c.setFillColor(C_LINEN)
-        c.rect(0, 0, w, h-41.5*mm, fill=1, stroke=0)
+        c.rect(0, 0, w, h-44*mm, fill=1, stroke=0)
 
-        mid = (h-41.5*mm)/2
+        mid = (h-44*mm)/2
         c.setFillColor(C_GOLD)
         c.setFont("DV-I", 8.5)
         c.drawCentredString(w/2, mid+8*mm,
